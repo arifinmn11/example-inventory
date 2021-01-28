@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { findById } from '../../services/unit';
-import { update } from "../../actions/unit"
-import { Link } from "react-router-dom"
+import { findById, update } from "../../actions/unit"
+import { Link, Redirect } from "react-router-dom"
 import { connect } from "react-redux"
-import { Redirect } from "react-router-dom"
-const UnitForm = ({ isUpdated, update }) => {
+const UnitForm = ({ isUpdated, update, findById, unit }) => {
     const { id } = useParams();
     const [redirect, setRedirect] = useState(false)
-    const [data, setData] = useState(findById(id))
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        if (id && parseInt(id) !== data.id) {
+            findById(id);
+            setData(unit)
+        }
+    }, [findById, data])
 
     const handleChange = (e) => {
         let name = e.target.name
@@ -19,14 +24,8 @@ const UnitForm = ({ isUpdated, update }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         update(data)
+        setRedirect(true)
     }
-
-    // useEffect(() => {
-    //     isUpdated
-    // }, [input])
-
-
-
 
     if (redirect === true) {
         return <Redirect to="/units" />
@@ -34,8 +33,11 @@ const UnitForm = ({ isUpdated, update }) => {
 
     return (
         <div style={{ marign: "auto" }}>
-            <form onSubmit={handleSubmit}>
 
+            {
+                console.log(data)
+            }
+            <form onSubmit={handleSubmit}>
                 <div>
                     <input onChange={handleChange} type="text" value={data?.id} name="id" hidden={true} />
 
@@ -49,8 +51,8 @@ const UnitForm = ({ isUpdated, update }) => {
                 </div>
                 <button type="butotn"> {id > 0 ? "Update" : "Submit"} </button>
                 {
-                    data ?
-                        <button> <Link to="/units">Back</Link>  </button> : null
+                    // data ?
+                    //     <button> <Link to="/units">Back</Link>  </button> : null
                 }
 
             </form>
@@ -58,14 +60,16 @@ const UnitForm = ({ isUpdated, update }) => {
     )
 }
 
-
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
-        isUpdated: state.updateUnit
+        // call reducer
+        unit: state.findUnitById,
+        update: state.updateUnit
+
     }
 }
 
-const mapDispatchToProps = { update };
+const mapDispatchToProps = { findById, update }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(UnitForm)

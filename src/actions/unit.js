@@ -23,7 +23,6 @@ export function findAll() {
 
 export function update(payload) {
 
-  console.log("payload", payload)
   return {
     type: UPDATE_UNIT,
     payload

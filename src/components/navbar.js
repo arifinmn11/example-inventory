@@ -29,9 +29,6 @@ function navbar() {
       <nav>
         <ul style={ul}>
           <li style={li}>
-            <Link></Link>
-          </li>
-          <li style={li}>
             <Link style={a} to="/unit">Unit Form</Link>
           </li>
           <li style={li}>

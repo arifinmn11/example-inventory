@@ -4,12 +4,17 @@ import UnitRow from "./UnitRow"
 import { findAll, removeById } from '../../actions/unit'
 import { connect } from "react-redux"
 
-function UnitList({ isRemoved, units, findAll, removeById }) {
+function UnitList({ isLoading, isRemoved, units, findAll, removeById }) {
 
     useEffect(() => {
-     
         findAll()
-    }, [isRemoved, units])
+    }, [])
+
+    useEffect(() => {
+        if (isRemoved) {
+            findAll()
+        }
+    }, [isRemoved])
 
     const onDelete = (id) => {
         removeById(id)
@@ -17,7 +22,7 @@ function UnitList({ isRemoved, units, findAll, removeById }) {
 
     return (
         <div>
-            
+
             <table>
                 <thead>
                     <tr>
@@ -29,11 +34,15 @@ function UnitList({ isRemoved, units, findAll, removeById }) {
                 </thead>
                 <tbody>
                     {
-                        units && units.map((e, i) => {
-                            return (
-                                <UnitRow onDeleted={() => onDelete(e.id)} key={i} data={e} />
-                            )
-                        })
+                        !isLoading ?
+                            units.map((e, i) => {
+                                return (
+                                    <UnitRow onDeleted={() => onDelete(e.id)} key={i} data={e} />
+                                )
+                            }) :
+                            <tr>
+                                <td colSpan="3"> Loading..</td>
+                            </tr>
                     }
                 </tbody>
             </table>
@@ -45,7 +54,8 @@ function UnitList({ isRemoved, units, findAll, removeById }) {
 const mapStateToProps = (state) => {
     return {
         isRemoved: state.removeUnitById,
-        units: state.findAllUnit
+        units: state.findAllUnit.data || [],
+        isLoading: state.findAllUnit.isLoading || state.removeUnitById.loading,
     }
 }
 
