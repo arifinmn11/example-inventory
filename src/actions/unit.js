@@ -1,4 +1,4 @@
-import { FIND_ALL_UNIT, FIND_UNIT_BY_ID, REMOVE_UNIT_BY_ID, UPDATE_UNIT } from "../constants/actions"
+import { FIND_ALL_UNIT, FIND_UNIT_BY_ID, REMOVE_UNIT_BY_ID, SAVE_UNIT, UPDATE_UNIT } from "../constants/actions"
 
 
 export function removeById(id) {
@@ -26,5 +26,12 @@ export function update(payload) {
   return {
     type: UPDATE_UNIT,
     payload
+  }
+}
+export function save(model) {
+  console.log("save action unit")
+  return {
+    type: SAVE_UNIT,
+    model
   }
 }

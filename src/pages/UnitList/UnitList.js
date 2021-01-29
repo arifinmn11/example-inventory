@@ -46,7 +46,7 @@ function UnitList({ isLoading, isRemoved, units, findAll, removeById }) {
                     }
                 </tbody>
             </table>
-            <Link to="/units">Back</Link>
+            <Link to="/unit">Add</Link>
         </div>
     )
 }
