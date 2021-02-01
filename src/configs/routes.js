@@ -1,4 +1,10 @@
-import { UnitForm, UnitList, Error } from "../pages"
+import {
+    UnitForm,
+    UnitList,
+    Error
+} from "../pages"
+
+import ItemList from "../pages/ItemList/ItemList"
 
 const routes = [
     {
@@ -14,6 +20,11 @@ const routes = [
     {
         path: '/unit/:id/edit',
         component: <UnitForm />,
+        exact: true
+    },
+    {
+        path: '/items',
+        component: <ItemList />,
         exact: true
     },
     {

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './configs/store';
-import Nav from "./components/navbar"
+import Navbar from "./components/Navbar"
 
 
 
@@ -15,10 +15,8 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div className="App">
         <Router>
-          <div>
-            <Nav />
+          <Navbar />
             <Switch>
               {
                 routes.map((e, i) => {
@@ -30,9 +28,7 @@ function App() {
                 })
               }
             </Switch>
-          </div>
         </Router>
-      </div>
     </Provider>
   );
 }

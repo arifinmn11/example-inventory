@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 
-function navbar() {
+function Navbar() {
 
   const ul = {
     listStyleType: "none",
@@ -34,10 +34,13 @@ function navbar() {
           <li style={li}>
             <Link style={a} to="/units">Unit List</Link>
           </li>
+          <li style={li}>
+            <Link style={a} to="/items">Item List</Link>
+          </li>
         </ul>
       </nav>
     </div>
   )
 }
 
-export default navbar
+export default Navbar

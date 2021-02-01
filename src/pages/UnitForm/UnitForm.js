@@ -10,20 +10,16 @@ const UnitForm = ({ isLoading, findById, unit, savedUnit, save }) => {
     const history = useHistory();
 
     useEffect(() => {
-        console.log("use effect ")
-        if (id && parseInt(id) !== data.id) {
-            console.log("use effect ")
+        if (data && id && parseInt(id) != data.id) {
             findById(id);
+            setData(unit)
+        } else if (id && data == null) {
             setData(unit)
         }
     }, [unit])
 
     useEffect(() => {
-
-        console.log(savedUnit)
-        if(savedUnit) {
-
-        console.log("use effects saveunit ")
+        if (savedUnit) {
             history.push('/units')
         }
     }, [savedUnit])
@@ -37,7 +33,6 @@ const UnitForm = ({ isLoading, findById, unit, savedUnit, save }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         save(data)
-        // history.push('/units')
     }
 
     return (

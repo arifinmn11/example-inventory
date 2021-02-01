@@ -10,8 +10,7 @@ import axios from "../configs/api"
 
 
 function* findUnitById(action) {
-  console.log("findUnit Sagas")
-  let result = yield axios.get(`/unit/${action.id}`)
+  let result = yield axios.get(`/units/${action.id}`)
     .then(data => {
       return ({
         type: FIND_UNIT_BY_ID_SUCCESS,
@@ -38,7 +37,7 @@ function* updateUnit(action) {
 
 
 function* findAllUnit() {
-  let result = yield axios.get('/unit/getall')
+  let result = yield axios.get('/units')
     .then(data => {
       return ({
         type: FIND_ALL_UNIT_SUCCESS,
@@ -56,7 +55,7 @@ function* findAllUnit() {
 }
 
 function* removeUnitById(action) {
-  let result = yield axios.delete(`/unit/${action.id}`)
+  let result = yield axios.delete(`/units/${action.id}`)
     .then(data => {
       return ({
         type: REMOVE_UNIT_BY_ID_SUCCESS,
@@ -74,7 +73,7 @@ function* removeUnitById(action) {
 
 function* saveUnit(action) {
   let model = action.model;
-  let method = 'POST', url = '/unit';
+  let method = 'POST', url = '/units';
   if (model.id) {
     method = "PUT";
     url += `/${model.id}`

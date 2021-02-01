@@ -1,3 +1,4 @@
+// Units
 export const FIND_ALL_UNIT = "FIND_ALL_UNIT"
 export const FIND_ALL_UNIT_SUCCESS = "FIND_ALL_UNIT_SUCCESS"
 export const FIND_ALL_UNIT_FAILURE = "FIND_ALL_UNIT_FAILURE"
@@ -17,3 +18,12 @@ export const UPDATE_UNIT_FAILURE = "UPDATE_UNIT_FAILURE"
 export const SAVE_UNIT = "SAVE_UNIT"
 export const SAVE_UNIT_SUCCESS = "SAVE_UNIT_SUCCESS"
 export const SAVE_UNIT_FAILURE = "SAVE_UNIT_FAILURE"
+
+// Items
+export const GET_ITEMS = "GET_ITEMS"
+export const GET_ITEMS_SUCCESS = "GET_ITEMS_SUCCESS"
+export const GET_ITEMS_FAILURE = "GET_ITEMS_FAILURE"
+
+// Paginaiton
+export const LEFT_PAGE = "LEFT_PAGE"
+export const RIGHT_PAGE = "RIGHT_PAGE"

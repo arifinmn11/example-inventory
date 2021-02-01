@@ -43,7 +43,7 @@ export const removeUnitById = (state = { ...initialState, data: false }, action)
 
 }
 
-export const findUnitById = (state = { ...initialState, data: false }, action) => {
+export const findUnitById = (state = { ...initialState }, action) => {
   switch (action.type) {
     case FIND_UNIT_BY_ID:
       return {
@@ -51,7 +51,6 @@ export const findUnitById = (state = { ...initialState, data: false }, action) =
         isLoading: true
       }
     case FIND_UNIT_BY_ID_SUCCESS:
-      console.log(action.data)
       return {
         data: action.data,
         isLoading: false,
@@ -61,7 +60,7 @@ export const findUnitById = (state = { ...initialState, data: false }, action) =
       return {
         data: false,
         isLoading: false,
-        error: action.error
+        error: true
       };
     default:
       return state;
@@ -85,7 +84,7 @@ export const findAllUnit = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: null
+        error: action.error
       };
     default:
       return {
@@ -100,11 +99,8 @@ export const updateUnit = (state = {}, action) => {
 
   switch (action.type) {
     case UPDATE_UNIT:
-      console.log("updateing unit in reducres")
       return true
     case UPDATE_UNIT_SUCCESS:
-
-      console.log("updateing success unit in reducres")
       return true
     default:
       return false;
@@ -112,7 +108,6 @@ export const updateUnit = (state = {}, action) => {
 }
 
 export const saveUnit = (state = { ...initialState }, action) => {
-  console.log("saveunit reducer")
   switch (action.type) {
     case SAVE_UNIT:
       return {
