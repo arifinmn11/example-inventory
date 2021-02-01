@@ -21,6 +21,7 @@ function UnitList({ isLoading, isRemoved, units, findAll, removeById, error }) {
     const onReload = () => {
         findAll()
     }
+
     useEffect(() => {
         findAll()
     }, [])

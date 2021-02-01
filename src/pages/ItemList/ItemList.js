@@ -3,12 +3,27 @@ import ItemRow from "./ItemRow"
 import { connect } from "react-redux"
 import { getAll } from "../../actions/item"
 import Pagination from "../../components/Pagination"
+import { useHistory } from "react-router-dom"
 
 const ItemList = ({ getAll, items }) => {
+  const history = useHistory()
+  const searchParams = history.location.search
+  const path = history.location.pathname
 
   useEffect(() => {
-    getAll()
+    let params = new URLSearchParams(searchParams.substring(1))
+    let page = params.get("page");
+    if (searchParams) {
+      getAll({
+        "page": page
+      })
+      history.push(`${path}${searchParams}`)
+    } else {
+      getAll()
+    }
   }, [])
+
+
 
   return (
     <div>
@@ -26,7 +41,7 @@ const ItemList = ({ getAll, items }) => {
           {
             items.list && items.list.map((e, i) => {
               return (
-                <ItemRow key={i} data={e} number={i} size={items.size} total={items.total} page={items.page}   />
+                <ItemRow key={i} data={e} number={i} size={items.size} total={items.total} page={items.page} />
               )
             })
           }
