@@ -23,7 +23,6 @@ function Navbar() {
     textDecoration: "none"
   }
 
-
   return (
     <div>
       <nav>

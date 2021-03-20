@@ -10,18 +10,29 @@ const ItemList = ({ getAll, items }) => {
   const searchParams = history.location.search
   const path = history.location.pathname
 
+
+  const [paginationStatus, setPaginationStatus] = useState({
+    page: 0,
+    size: 10,
+  })
+
+  const onHandlePage = (value) => {
+    setPaginationStatus({
+      ...paginationStatus,
+      page: value
+    })
+  }
+
   useEffect(() => {
-    let params = new URLSearchParams(searchParams.substring(1))
-    let page = params.get("page");
-    if (searchParams) {
-      getAll({
-        "page": page
-      })
-      history.push(`${path}${searchParams}`)
-    } else {
-      getAll()
-    }
+    getAll()
   }, [])
+
+  useEffect(() => {
+    if (paginationStatus.page > 0)
+      getAll({ page: paginationStatus.page })
+    else
+      getAll()
+  }, [paginationStatus])
 
 
 
@@ -41,16 +52,24 @@ const ItemList = ({ getAll, items }) => {
           {
             items.list && items.list.map((e, i) => {
               return (
-                <ItemRow key={i} data={e} number={i} size={items.size} total={items.total} page={items.page} />
+                <ItemRow
+                  key={i}
+                  data={e}
+                  number={i}
+                  size={items.size} total={items.total} page={items.page}
+                />
               )
             })
           }
         </tbody>
       </table>
-      {/* {
-        console.log(items.page)
-      } */}
-      <Pagination total={items.total} size={items.size} page={items.page} />
+      <Pagination
+        total={items.total}
+        size={items.size}
+        page={items.page}
+        setPaginationStatus={setPaginationStatus} paginationStatus={paginationStatus}
+        handlePage={(value) => onHandlePage(value)}
+      />
     </div>
   )
 }

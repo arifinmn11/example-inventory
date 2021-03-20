@@ -35,12 +35,10 @@ function insertParam(key, value) {
   // document.location.search = params;
 }
 
-function* getItems(params) {
+function* getItems(action) {
   let uri = `/items?`
-  console.log("GET ITEMS PARAMS")
-  console.log(params.params)
-  if (params.params) {
-    uri += `page=${params.params.page}`
+  if (action.params) {
+    uri += `page=${action.params.page}`
   }
   let result = yield axios.get(uri)
     .then(data => {
@@ -55,7 +53,6 @@ function* getItems(params) {
         error: err
       })
     })
-  console.log(result)
   yield put(result)
 }
 

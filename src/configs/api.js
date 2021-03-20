@@ -1,5 +1,8 @@
 import axios from "axios"
 
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL
+axios.defaults.timeout = 10000;
+
 axios.interceptors.response.use(function (response) {
   if (response.status != 200) {
     throw new Error();
